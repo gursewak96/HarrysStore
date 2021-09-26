@@ -27,10 +27,8 @@ public class RegistrationController {
 
     @PostMapping
     public String registerUser(@ModelAttribute("user")UserDto userDto) throws UsernameAlreadyExistException {
+          userService.register(userDto);
 
-
-        userService.register(userDto);
-
-        return "success";
+        return "redirect:/login";
     }
 }

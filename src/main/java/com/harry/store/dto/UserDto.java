@@ -1,7 +1,10 @@
 package com.harry.store.dto;
 
+import com.harry.store.model.Role;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 public class UserDto {
     @NotEmpty(message = "First name can not be empty")
@@ -15,6 +18,16 @@ public class UserDto {
 
     @NotEmpty(message = "Password can not be empty")
     private String password;
+
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultUserService implements UserService{
@@ -34,10 +35,29 @@ public class DefaultUserService implements UserService{
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
+
         List<Role> roles = new ArrayList();
-        roles.add(new Role(2,"USER"));
+        if(userDto.getRoles() == null){
+            roles.add(new Role(2,"USER"));
+        }else{
+            roles = userDto.getRoles();
+        }
+
+        System.out.println(roles);
         user.setRoles(roles);
         userRepository.save(user);
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public void deleteUser(Long id){
+       Optional<User> user = userRepository.findById(id);
+       if(!user.isPresent())
+           throw new UsernameNotFoundException("User don't exist with id: "+id);
+
+       userRepository.delete(user.get());
     }
 
 
