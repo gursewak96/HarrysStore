@@ -46,4 +46,12 @@ public class CartItemController {
 
         return "redirect:/shop/viewproduct/"+id;
     }
+
+    @GetMapping("/removeItem/{id}")
+    public String removeCartItem(@PathVariable("id") Long id,
+                                 @AuthenticationPrincipal StoreUserDetails user)
+    {
+        cartItemService.removeCartItemById(id,user.getUser());
+        return "redirect:/cart";
+    }
 }
