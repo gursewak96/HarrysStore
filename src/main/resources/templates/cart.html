@@ -51,7 +51,8 @@
                                                 <h5 th:text="${item.product.name}">Blue denim shirt</h5>
                                                 <p class="mb-3 text-uppercase small">Weight: <span th:text="${item.product.weight}"></span> grams</p>
                                                 <p class="mb-2 text-uppercase small">Category: <span th:text="${item.product.category.name}"></span></p>
-                                                <div><input type="number" th:value="${item.quantity}"></div>
+                                                <div th:replace="fragments/quantityController.frag :: quantityControl(${item.quantity}, ${item.product.id})"></div>
+                                                <p class="mb-2 text-uppercase small">Subtotal: <span class="font-weight-bolder productSubtotal" th:id="${item.id}" th:text="${item.subtotal}"></span></p>
                                             </div>
 
                                         </div>
@@ -92,7 +93,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                     Amount Payable
-                                    <span>₹<span>1000</span></span>
+                                    <span>₹<span class="totalAmount">1000</span></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                     Shipping
@@ -105,7 +106,7 @@
                                             <p class="mb-0">(including VAT)</p>
                                         </strong>
                                     </div>
-                                    <span><strong>₹<span >1000</span></strong></span>
+                                    <span><strong>₹<span class="totalAmount" >1000</span></strong></span>
                                 </li>
                             </ul>
 
@@ -150,6 +151,9 @@
     </div>
 </main>
 <!--Main layout-->
+<input type="hidden" name="contextPath" th:value="@{/}"/>
+<input type="hidden" name="csrfHeaderName" th:value="${_csrf.headerName}"/>
+<input type="hidden" name="csrfToken" th:value="${_csrf.token}"/>
 
 
 
@@ -158,5 +162,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script th:src="@{'/js/cart.js'}"></script>
 </body>
 </html>

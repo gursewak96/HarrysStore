@@ -54,4 +54,12 @@ public class CartItemController {
         cartItemService.removeCartItemById(id,user.getUser());
         return "redirect:/cart";
     }
+
+//    @GetMapping("/update/{id}")
+//    public String updateCartItem(@PathVariable("id") Long id,
+//                                 @AuthenticationPrincipal StoreUserDetails user)
+//    {
+//        cartItemService.updateCartItemById(id, user.getUser());
+//        return "redirect:/cart";
+//    }
 }

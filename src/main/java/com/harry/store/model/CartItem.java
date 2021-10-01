@@ -30,6 +30,8 @@ public class CartItem {
     }
 
 
+    @Transient
+    public double getSubtotal(){ return this.product.getPrice() * this.quantity;}
 
     public Long getId() {
         return id;
